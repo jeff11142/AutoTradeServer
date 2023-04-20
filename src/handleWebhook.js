@@ -1,5 +1,6 @@
 import Binance from "binance-api-node";
 import config from "./config";
+import fetch from "node-fetch";
 
 const client = Binance.default({
   apiKey: config.apiKey,
@@ -71,6 +72,23 @@ export const handleWebhook = async (req, res) => {
         pricePrecision[alert?.symbol]
       )
     );
+
+    // 使用 fetch 向目標 API 發送 GET 請求
+    const targetApiUrl = "https://api.telegram.org/bot5570850767:AAG1ucj0OECjbfaWVcAYZKiKzI4AnUEwy04/sendMessage?chat_id=@jeffliu_trading_alert&text=" + take_profit_price;
+    fetch(targetApiUrl)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Failed to fetch data from target API");
+        }
+      })
+      .then((data) => {
+        console.log("Data from target API:", data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data from target API:", error);
+      });
 
     //Get the stop loss price from Tradingview order
     const stop_loss_price = Number(
