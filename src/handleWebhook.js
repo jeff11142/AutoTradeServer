@@ -1,10 +1,9 @@
 import Binance from "binance-api-node";
-import config from "./config";
 import fetch from "node-fetch";
 
 const client = Binance.default({
-  apiKey: config.apiKey,
-  apiSecret: config.apiSecret,
+  apiKey: process.env.BINANCE_KEY,
+  apiSecret: process.env.BINANCE_SECRET,
   // httpFutures: "https://testnet.binancefuture.com", // For testing
   // httpBase: "https://testnet.binance.vision", // For testing
 });
