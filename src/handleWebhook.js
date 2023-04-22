@@ -1,5 +1,8 @@
 import Binance from "binance-api-node";
 import fetch from "node-fetch";
+// Load environment variables from .env file
+import dotenv from 'dotenv';
+dotenv.config();
 
 const client = Binance.default({
   apiKey: process.env.BINANCE_KEY,
@@ -38,7 +41,7 @@ const contractPrecision = {
 
 export const handleWebhook = async (req, res) => {
   const alert = req.body;
-  
+
   //Log key
   console.log("key: ", process.env.BINANCE_KEY);
   console.log("secret: ", process.env.BINANCE_SECRET);
