@@ -1,6 +1,9 @@
 import express, { json } from "express";
 import bodyParser from "body-parser";
 import { handleWebhook } from "./handleWebhook";
+// Load environment variables from .env file
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 

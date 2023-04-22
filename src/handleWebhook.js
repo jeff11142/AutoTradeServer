@@ -38,6 +38,11 @@ const contractPrecision = {
 
 export const handleWebhook = async (req, res) => {
   const alert = req.body;
+  
+  //Log key
+  console.log("key: ", process.env.BINANCE_KEY);
+  console.log("secret: ", process.env.BINANCE_SECRET);
+
   console.log("----RECEVING order----");
   console.log("alert", alert);
   if (!alert?.symbol) {
