@@ -38,7 +38,7 @@ const contractPrecision = {
   APEUSDT: 0,
   GMTUSDT: 0,
   MKRUSDT: 3,
-  PEPEUSDT: 2,
+  PEPEUSDT: 0,
 };
 
 export const handleWebhook = async (req, res) => {
