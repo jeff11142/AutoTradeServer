@@ -23,7 +23,7 @@ const pricePrecision = {
   DUSKUSDT: 5,
   APEUSDT: 3,
   MKRUSDT: 1,
-  PEPEUSDT: 5,
+  PEPEUSDT: 8,
 };
 
 const contractPrecision = {
@@ -38,7 +38,7 @@ const contractPrecision = {
   APEUSDT: 0,
   GMTUSDT: 0,
   MKRUSDT: 3,
-  PEPEUSDT: 5,
+  PEPEUSDT: 2,
 };
 
 export const handleWebhook = async (req, res) => {
