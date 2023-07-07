@@ -29,11 +29,11 @@ sudo apt install nginx
 ```
 8. Clone the repo: (replace with your repo)
 ```
-git clone https://github.com/danny-dang/tradingview-binance-auto-boilerplate.git
+git clone https://github.com/jeff11142/AutoTradeServer.git
 ```
 9. Install dependencies: (Replace with your folder)
 ```
-cd tradingview-binance-auto-boilerplate
+cd AutoTradeServer
 npm install
 ```
 10. Run the server using pm2
