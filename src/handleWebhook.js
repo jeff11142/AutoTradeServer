@@ -23,7 +23,7 @@ const pricePrecision = {
   DUSKUSDT: 5,
   APEUSDT: 3,
   MKRUSDT: 1,
-  1000PEPEUSDT: 1,
+  PEPEUSDT: 5,
 };
 
 const contractPrecision = {
@@ -38,11 +38,12 @@ const contractPrecision = {
   APEUSDT: 0,
   GMTUSDT: 0,
   MKRUSDT: 3,
-  1000PEPEUSDT: 3,
+  PEPEUSDT: 5,
 };
 
 export const handleWebhook = async (req, res) => {
   const alert = req.body;
+  let processedSymbol;
 
   //Log key
   console.log("key: ", process.env.BINANCE_KEY);
@@ -69,16 +70,24 @@ export const handleWebhook = async (req, res) => {
     //When Tradingview sends alert, we will get the order contracts sent from Tradingview
     //We use this quanity to open position in Binance
     //we also need to change the contract precision because the one got from TV is different for Binnace
+    // 檢查 alert.symbol 是否存在並且是否包含任何數字
+    if (alert?.symbol && /\d/.test(alert.symbol)) {
+      // 使用正則表達式將所有的數字去掉
+      processedSymbol = alert.symbol.replace(/\d/g, "");
+    } else {
+      // 如果不包含數字，則保留原值
+      processedSymbol = alert?.symbol;
+    }
     let quantity = Number(
       Number(alert.strategy.order_contracts).toFixed(
-        contractPrecision[alert?.symbol]
+        contractPrecision[processedSymbol]
       )
     );
 
     //Get the take profit price from Tradingview order
     const take_profit_price = Number(
       Number(alert.strategy.meta_data?.tp_price || 0).toFixed(
-        pricePrecision[alert?.symbol]
+        pricePrecision[processedSymbol]
       )
     );
 
@@ -102,7 +111,7 @@ export const handleWebhook = async (req, res) => {
     //Get the stop loss price from Tradingview order
     const stop_loss_price = Number(
       Number(alert.strategy.meta_data?.sl_price || 0).toFixed(
-        pricePrecision[alert?.symbol]
+        pricePrecision[processedSymbol]
       )
     );
 
