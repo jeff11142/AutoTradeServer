@@ -92,7 +92,8 @@ export const handleWebhook = async (req, res) => {
     );
 
     // 使用 fetch 向目標 API 發送 GET 請求
-    const targetApiUrl = "https://api.telegram.org/bot5570850767:AAG1ucj0OECjbfaWVcAYZKiKzI4AnUEwy04/sendMessage?chat_id=@jeffliu_trading_alert&text=" + take_profit_price;
+    const message = "幣種: " + alert?.symbol +"%0A執行: " + alert.strategy.order_id + "%0A價格: " + alert.strategy.order_price
+    const targetApiUrl = "https://api.telegram.org/bot5570850767:AAG1ucj0OECjbfaWVcAYZKiKzI4AnUEwy04/sendMessage?chat_id=@jeffliu_trading_alert&text=" + message;
     fetch(targetApiUrl)
       .then((response) => {
         if (response.ok) {
